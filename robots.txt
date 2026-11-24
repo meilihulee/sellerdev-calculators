@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meilihulee.github.io/sellerdev-calculators/sitemap.xml

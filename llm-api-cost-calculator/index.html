@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LLM API Cost Calculator: OpenAI vs Claude vs Gemini vs Open-Weight</title>
+<meta name="description" content="Estimate your monthly LLM API bill and the savings from swapping models. Compare OpenAI, Anthropic, Google and open-weight APIs with caching and batch discounts." />
+<link rel="canonical" href="https://meilihulee.github.io/sellerdev-calculators/llm-api-cost-calculator/" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="theme-color" content="#4f46e5" />
+<link rel="icon" href="/sellerdev-calculators/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SellerDev Calculators" />
+<meta property="og:title" content="LLM API Cost Calculator: OpenAI vs Claude vs Gemini vs Open-Weight" />
+<meta property="og:description" content="Estimate your monthly LLM API bill and the savings from swapping models. Compare OpenAI, Anthropic, Google and open-weight APIs with caching and batch discounts." />
+<meta property="og:url" content="https://meilihulee.github.io/sellerdev-calculators/llm-api-cost-calculator/" />
+<meta property="og:image" content="https://meilihulee.github.io/sellerdev-calculators/og-image.png" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="LLM API Cost Calculator: OpenAI vs Claude vs Gemini vs Open-Weight" />
+<meta name="twitter:description" content="Estimate your monthly LLM API bill and the savings from swapping models. Compare OpenAI, Anthropic, Google and open-weight APIs with caching and batch discounts." />
+<meta name="twitter:image" content="https://meilihulee.github.io/sellerdev-calculators/og-image.png" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"LLM API Monthly Cost & Model-Swap Savings Calculator","url":"https://meilihulee.github.io/sellerdev-calculators/llm-api-cost-calculator/","description":"Estimate your monthly LLM API bill and the savings from swapping models. Compare OpenAI, Anthropic, Google and open-weight APIs with caching and batch discounts.","applicationCategory":"FinanceApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"dateModified":"2026-11-24"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is LLM API cost calculated?","acceptedAnswer":{"@type":"Answer","text":"Monthly cost = requests × (uncached input tokens × input price + cached input tokens × cached price + output tokens × output price) ÷ 1,000,000. Batch requests are typically billed at 50% of the standard rate."}},{"@type":"Question","name":"Why are output tokens more expensive than input tokens?","acceptedAnswer":{"@type":"Answer","text":"Generating tokens is sequential and compute-heavy, so providers price output at roughly 4–5× input on most models. Shortening responses is often the fastest way to cut a bill."}},{"@type":"Question","name":"How much does prompt caching save?","acceptedAnswer":{"@type":"Answer","text":"Cached input is commonly billed at around 10% of the normal input price (sometimes less), so a long, repeated system prompt with a high cache hit rate can cut input spend by up to 90%. Cache writes may cost extra."}},{"@type":"Question","name":"Are open-weight models really cheaper?","acceptedAnswer":{"@type":"Answer","text":"Hosted open-weight models (Llama, Qwen, DeepSeek, gpt-oss) are often 10–100× cheaper per token than flagship closed models. Whether they are good enough depends on your task, so test quality before switching."}},{"@type":"Question","name":"Do these prices change?","acceptedAnswer":{"@type":"Answer","text":"Often. Several current rates are introductory and scheduled to rise (for example Gemini 3.8 Flash on January 1, 2027). Check each provider's pricing page and edit the prices in the calculator before making decisions."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Calculators","item":"https://meilihulee.github.io/sellerdev-calculators/"},{"@type":"ListItem","position":2,"name":"LLM API Monthly Cost & Model-Swap Savings Calculator","item":"https://meilihulee.github.io/sellerdev-calculators/llm-api-cost-calculator/"}]}</script>
+  <script type="module" crossorigin src="/sellerdev-calculators/assets/llm-cost-Ccav5smz.js"></script>
+  <link rel="modulepreload" crossorigin href="/sellerdev-calculators/assets/index-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/sellerdev-calculators/assets/vendor-Bm3Z3AoX.js">
+  <link rel="modulepreload" crossorigin href="/sellerdev-calculators/assets/format-TowYr0ek.js">
+  <link rel="stylesheet" crossorigin href="/sellerdev-calculators/assets/style-CX6KUlyy.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+<header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-20">
+  <div class="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between gap-4">
+    <a href="/sellerdev-calculators/" class="font-semibold text-slate-900 tracking-tight">SellerDev Calculators</a>
+    <nav class="hidden md:flex gap-5 text-sm text-slate-600" aria-label="Calculators">
+      <a href="/sellerdev-calculators/amazon-fba-aged-inventory-storage-fee-calculator/" class="hover:text-slate-900 ">FBA Storage 2027</a>
+      <a href="/sellerdev-calculators/ebay-vs-amazon-fba-profit-calculator/" class="hover:text-slate-900 ">eBay vs FBA</a>
+      <a href="/sellerdev-calculators/llm-api-cost-calculator/" class="hover:text-slate-900 text-slate-900 font-medium">LLM API Cost</a>
+      <a href="/sellerdev-calculators/stripe-vs-lemon-squeezy-fee-calculator/" class="hover:text-slate-900 ">Stripe vs Lemon Squeezy</a>
+    </nav>
+  </div>
+</header>
+<main class="mx-auto max-w-6xl px-4 pt-8">
+  <nav class="text-xs text-slate-500" aria-label="Breadcrumb"><a href="/sellerdev-calculators/" class="hover:underline">Calculators</a> <span aria-hidden="true">/</span> <span>LLM API Monthly Cost &amp; Model-Swap Savings Calculator</span></nav>
+  <h1 class="mt-2 text-2xl md:text-4xl font-bold tracking-tight text-slate-900">LLM API Monthly Cost &amp; Model-Swap Savings Calculator</h1>
+  <p class="mt-3 max-w-3xl text-slate-600 leading-relaxed">Describe your workload once (requests, input and output tokens, cache hit rate, batch share) and compare what it costs on every major API, then see exactly how much you save per month and per year by moving to a different model. Prices are list rates per million tokens and are editable.</p>
+  <p class="mt-2 text-xs text-slate-500">Rates reviewed 2026-11-24 · runs entirely in your browser · nothing is uploaded</p>
+
+  <section id="calculator" class="mt-6" aria-label="Calculator">
+    <div id="calc-root"><div class="rounded-2xl border border-slate-200 bg-white p-8 text-slate-500">Loading calculator…</div></div>
+    <noscript><p class="mt-4 text-sm text-red-600">This calculator needs JavaScript enabled.</p></noscript>
+  </section>
+
+  
+<aside class="my-10 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50 to-white p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-4" aria-label="Sponsored">
+  <div class="flex-1">
+    <p class="font-semibold text-slate-900">See exactly where your LLM spend goes.</p>
+    <p class="text-sm text-slate-600 mt-1">AI API Cost Auditor reads your usage logs, flags waste (uncached prompts, oversized models, retries) and shows the swap that saves the most.</p>
+  </div>
+  <a href="https://meilihulee.github.io/tokentrim/?utm_source=microtools&amp;utm_medium=cta&amp;utm_campaign=llm-cost" rel="noopener sponsored" class="inline-flex justify-center rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 whitespace-nowrap">Audit my AI API costs →</a>
+</aside>
+
+  <section class="mt-4" aria-labelledby="faq-h">
+    <h2 id="faq-h" class="text-xl md:text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+    <div class="mt-4 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
+      <details class="group p-5" open>
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-medium text-slate-900"><h3 class="text-base">How is LLM API cost calculated?</h3><span class="text-slate-400 group-open:rotate-45 transition-transform text-xl leading-none" aria-hidden="true">+</span></summary>
+        <p class="mt-3 text-slate-600 leading-relaxed">Monthly cost = requests × (uncached input tokens × input price + cached input tokens × cached price + output tokens × output price) ÷ 1,000,000. Batch requests are typically billed at 50% of the standard rate.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-medium text-slate-900"><h3 class="text-base">Why are output tokens more expensive than input tokens?</h3><span class="text-slate-400 group-open:rotate-45 transition-transform text-xl leading-none" aria-hidden="true">+</span></summary>
+        <p class="mt-3 text-slate-600 leading-relaxed">Generating tokens is sequential and compute-heavy, so providers price output at roughly 4–5× input on most models. Shortening responses is often the fastest way to cut a bill.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-medium text-slate-900"><h3 class="text-base">How much does prompt caching save?</h3><span class="text-slate-400 group-open:rotate-45 transition-transform text-xl leading-none" aria-hidden="true">+</span></summary>
+        <p class="mt-3 text-slate-600 leading-relaxed">Cached input is commonly billed at around 10% of the normal input price (sometimes less), so a long, repeated system prompt with a high cache hit rate can cut input spend by up to 90%. Cache writes may cost extra.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-medium text-slate-900"><h3 class="text-base">Are open-weight models really cheaper?</h3><span class="text-slate-400 group-open:rotate-45 transition-transform text-xl leading-none" aria-hidden="true">+</span></summary>
+        <p class="mt-3 text-slate-600 leading-relaxed">Hosted open-weight models (Llama, Qwen, DeepSeek, gpt-oss) are often 10–100× cheaper per token than flagship closed models. Whether they are good enough depends on your task, so test quality before switching.</p>
+      </details>
+      <details class="group p-5">
+        <summary class="cursor-pointer list-none flex justify-between gap-4 font-medium text-slate-900"><h3 class="text-base">Do these prices change?</h3><span class="text-slate-400 group-open:rotate-45 transition-transform text-xl leading-none" aria-hidden="true">+</span></summary>
+        <p class="mt-3 text-slate-600 leading-relaxed">Often. Several current rates are introductory and scheduled to rise (for example Gemini 3.8 Flash on January 1, 2027). Check each provider's pricing page and edit the prices in the calculator before making decisions.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="mt-12" aria-labelledby="more-h">
+    <h2 id="more-h" class="text-lg font-semibold text-slate-900">More free calculators</h2>
+    <div class="mt-3 grid gap-3 sm:grid-cols-3">
+      <a href="/sellerdev-calculators/amazon-fba-aged-inventory-storage-fee-calculator/" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-indigo-300 hover:shadow-sm"><span class="font-medium text-slate-900">Amazon FBA Aged Inventory &amp; 2027 Storage Fee Calculator</span><span class="block mt-1 text-sm text-slate-500">Old aged-inventory surcharge vs the Feb 2027 unified age-based storage fee, per cohort.</span></a>
+      <a href="/sellerdev-calculators/ebay-vs-amazon-fba-profit-calculator/" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-indigo-300 hover:shadow-sm"><span class="font-medium text-slate-900">eBay vs Amazon FBA Net Profit &amp; Fee Calculator</span><span class="block mt-1 text-sm text-slate-500">Same product, two channels: every fee, net profit, margin and ROI side by side.</span></a>
+      <a href="/sellerdev-calculators/stripe-vs-lemon-squeezy-fee-calculator/" class="rounded-xl border border-slate-200 bg-white p-4 hover:border-indigo-300 hover:shadow-sm"><span class="font-medium text-slate-900">SaaS Stripe vs Lemon Squeezy Net Revenue &amp; Fee Calculator</span><span class="block mt-1 text-sm text-slate-500">Net revenue after Stripe, Stripe Managed Payments and Lemon Squeezy fees.</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="mt-16 border-t border-slate-200 bg-white">
+  <div class="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-500 grid gap-4 md:grid-cols-2">
+    <div>
+      <p class="font-medium text-slate-700">SellerDev Calculators</p>
+      <p class="mt-1">Free, instant fee &amp; cost calculators for e-commerce sellers and AI developers.</p>
+      <p class="mt-2">Fee data last reviewed 2026-11-24. Estimates only, not financial or tax advice. Always confirm rates on the provider's own pricing page.</p>
+    </div>
+    <ul class="md:text-right space-y-1">
+      <li><a class="hover:text-slate-800" href="/sellerdev-calculators/amazon-fba-aged-inventory-storage-fee-calculator/">Amazon FBA Aged Inventory &amp; 2027 Storage Fee Calculator</a></li>
+      <li><a class="hover:text-slate-800" href="/sellerdev-calculators/ebay-vs-amazon-fba-profit-calculator/">eBay vs Amazon FBA Net Profit &amp; Fee Calculator</a></li>
+      <li><a class="hover:text-slate-800" href="/sellerdev-calculators/llm-api-cost-calculator/">LLM API Monthly Cost &amp; Model-Swap Savings Calculator</a></li>
+      <li><a class="hover:text-slate-800" href="/sellerdev-calculators/stripe-vs-lemon-squeezy-fee-calculator/">SaaS Stripe vs Lemon Squeezy Net Revenue &amp; Fee Calculator</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
